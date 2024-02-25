@@ -148,26 +148,35 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     
-    let pp = './src/fg_logo.jpg'
+    conn.sendMessage(m.chat, {
+text: text,
+contextInfo: {
+externalAdReply: {
+title: 'BOBIZA BOT ♥',
+body: "أول بوت واتساب في العالم العربي 💖",
+thumbnailUrl: 'https://telegra.ph/file/2829c7653514416d207e2.jpg',
+sourceUrl: 'https://instagram.com/noureddine_ouafy',
+mediaType: 1,
+renderLargerThumbnail: true
+}}}, { quoted: m})
 
-    /*conn.sendButton(m.chat, text.trim(), `▢ DyLux  ┃ ᴮᴼᵀ\n${mssg.ig}`, pp, [
+    /*conn.sendFile(m.chat, 'menu.png', text.trim(), m, null, )
+    /*conn.sendButton(m.chat, text.trim(), '▢ DyLux  ┃ ᴮᴼᵀ\n▢ Sígueme en Instagram\nhttps://www.instagram.com/fg98_ff', pp, [
       ['ꨄ︎ Apoyar', `${_p}donate`],
       ['⏍ Info', `${_p}botinfo`],
       ['⌬ Grupos', `${_p}gpdylux`]
-    ], m, rpl)*/
-    conn.sendFile(m.chat, pp, 'menu.jpg', text.trim(), m, null, rcanal)
-  
-    m.react('📚') 
-    
+    ],m, rpl)*/
+
   } catch (e) {
-    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error', m)
+    conn.reply(m.chat, '❎ هناك خطأ في لائحة الاوامر', m)
     throw e
   }
 }
-//handler.help = ['help']
-//handler.tags = ['main']
-handler.command = ['menu', 'help', 'menú'] 
+handler.help = ['menu']
+handler.tags = ['infobot']
+handler.command = ['menu','b','list'] 
 handler.register = false
+
 
 export default handler
 
